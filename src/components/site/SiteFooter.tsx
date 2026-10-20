@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { STORE } from "@/lib/format";
 
@@ -42,7 +42,7 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
+function FooterCol({ title, links }: { title: string; links: [LinkProps["to"], string][] }) {
   return (
     <div>
       <p className="eyebrow mb-4 text-gold">{title}</p>
