@@ -46,8 +46,8 @@ const stockClass: Record<StockStatus, string> = {
 
 function ProductPage() {
   const { slug } = Route.useParams();
-  const { data: product } = useSuspenseQuery(productQuery(slug));
-  if (!product) return null;
+  const { data } = useSuspenseQuery(productQuery(slug));
+  const product = data!; // loader throws notFound() when missing
   const { data: related } = useSuspenseQuery(relatedQuery(product));
   const { add } = useCart();
 
