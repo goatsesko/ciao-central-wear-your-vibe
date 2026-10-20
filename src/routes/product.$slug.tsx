@@ -52,7 +52,7 @@ function ProductPage() {
   const { add } = useCart();
 
   const [active, setActive] = useState(0);
-  const [colour, setColour] = useState(product.colours[0].name);
+  const [colour, setColour] = useState(product.colours[0]?.name ?? "");
   const [size, setSize] = useState<string | null>(null);
   const [qty, setQty] = useState(1);
 
@@ -60,10 +60,13 @@ function ProductPage() {
   const stock: StockStatus | undefined = variant?.stock;
 
   const addToBag = () => {
-    if (!variant) return toast.error("Please choose a size.");
+    if (!variant) {
+      toast.error("Please choose a size.");
+      return;
+    }
     add({
       sku: variant.sku, productId: product.id, slug: product.slug, name: product.name,
-      image: product.images[0], price: product.price, size: variant.size, colour: variant.colour, quantity: qty,
+      image: product.images[0] ?? "", price: product.price, size: variant.size, colour: variant.colour, quantity: qty,
     });
   };
 

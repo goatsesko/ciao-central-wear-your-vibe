@@ -42,7 +42,7 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: [LinkProps["to"], string][] }) {
+function FooterCol({ title, links }: { title: string; links: [NonNullable<LinkProps["to"]>, string][] }) {
   return (
     <div>
       <p className="eyebrow mb-4 text-gold">{title}</p>

@@ -31,13 +31,13 @@ export type Product = {
 export type SortKey = "newest" | "price-asc" | "price-desc";
 
 export type ProductQuery = {
-  q?: string;
-  category?: string;
-  sort?: SortKey;
-  minPrice?: number;
-  maxPrice?: number;
-  sizes?: string[];
-  colours?: string[];
-  collection?: string;
-  limit?: number;
+  q?: string | undefined;
+  category?: string | undefined;
+  sort?: SortKey | undefined;
+  minPrice?: number | undefined;
+  maxPrice?: number | undefined;
+  sizes?: string[] | undefined;
+  colours?: string[] | undefined;
+  collection?: string | undefined;
+  limit?: number | undefined;
 };
