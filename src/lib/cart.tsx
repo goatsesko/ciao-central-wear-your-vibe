@@ -27,7 +27,9 @@ type CartCtx = {
   total: number;
 };
 
-const Ctx = createContext<CartCtx | null>(null);
+// Keep one context instance across hot reloads so provider and consumers never mismatch.
+const g = globalThis as unknown as { __ciaoCartCtx?: React.Context<CartCtx | null> };
+const Ctx = (g.__ciaoCartCtx ??= createContext<CartCtx | null>(null));
 const KEY = "ciao-central-bag-v1";
 export const MAX_QTY = 10;
 
