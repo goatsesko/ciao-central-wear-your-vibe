@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      dress_me_requests: {
+        Row: {
+          budget: number | null
+          chosen_at: string | null
+          chosen_outfit: Json | null
+          created_at: string
+          id: string
+          occasion: string | null
+          outfits: Json
+          request_text: string
+          size: string | null
+        }
+        Insert: {
+          budget?: number | null
+          chosen_at?: string | null
+          chosen_outfit?: Json | null
+          created_at?: string
+          id?: string
+          occasion?: string | null
+          outfits?: Json
+          request_text: string
+          size?: string | null
+        }
+        Update: {
+          budget?: number | null
+          chosen_at?: string | null
+          chosen_outfit?: Json | null
+          created_at?: string
+          id?: string
+          occasion?: string | null
+          outfits?: Json
+          request_text?: string
+          size?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
