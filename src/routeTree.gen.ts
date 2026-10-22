@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AppsRouteImport } from './routes/apps'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DressMeRouteImport } from './routes/dress-me'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as TeamRouteImport } from './routes/team'
@@ -36,6 +37,11 @@ const AppsRoute = AppsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DressMeRoute = DressMeRouteImport.update({
+  id: '/dress-me',
+  path: '/dress-me',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/apps': typeof AppsRoute
   '/contact': typeof ContactRoute
+  '/dress-me': typeof DressMeRoute
   '/shop': typeof ShopRoute
   '/support': typeof SupportRoute
   '/team': typeof TeamRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/apps': typeof AppsRoute
   '/contact': typeof ContactRoute
+  '/dress-me': typeof DressMeRoute
   '/shop': typeof ShopRoute
   '/support': typeof SupportRoute
   '/team': typeof TeamRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/apps': typeof AppsRoute
   '/contact': typeof ContactRoute
+  '/dress-me': typeof DressMeRoute
   '/shop': typeof ShopRoute
   '/support': typeof SupportRoute
   '/team': typeof TeamRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apps'
     | '/contact'
+    | '/dress-me'
     | '/shop'
     | '/support'
     | '/team'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apps'
     | '/contact'
+    | '/dress-me'
     | '/shop'
     | '/support'
     | '/team'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apps'
     | '/contact'
+    | '/dress-me'
     | '/shop'
     | '/support'
     | '/team'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AppsRoute: typeof AppsRoute
   ContactRoute: typeof ContactRoute
+  DressMeRoute: typeof DressMeRoute
   ShopRoute: typeof ShopRoute
   SupportRoute: typeof SupportRoute
   TeamRoute: typeof TeamRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dress-me': {
+      id: '/dress-me'
+      path: '/dress-me'
+      fullPath: '/dress-me'
+      preLoaderRoute: typeof DressMeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AppsRoute: AppsRoute,
   ContactRoute: ContactRoute,
+  DressMeRoute: DressMeRoute,
   ShopRoute: ShopRoute,
   SupportRoute: SupportRoute,
   TeamRoute: TeamRoute,

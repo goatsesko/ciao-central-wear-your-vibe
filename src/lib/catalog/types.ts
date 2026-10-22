@@ -11,6 +11,20 @@ export type Variant = {
 
 export type Category = "tees" | "hoodies" | "pants" | "denim" | "accessories";
 
+export type Occasion = "date" | "church" | "work" | "party" | "casual" | "campus";
+export type Vibe = "streetwear" | "smart" | "minimal" | "bold";
+export type OutfitSlot = "top" | "bottom" | "layer" | "accessory";
+
+/** Styling tags used by the Dress Me stylist. */
+export type StyleTags = {
+  occasion: Occasion[];
+  vibe: Vibe[];
+  color: string[];
+  fit: string;
+  season: string;
+  category: OutfitSlot;
+};
+
 export type Product = {
   id: string;
   slug: string;
@@ -25,6 +39,7 @@ export type Product = {
   colours: Colour[];
   sizes: string[];
   variants: Variant[];
+  tags: StyleTags;
   createdAt: string; // ISO
 };
 
