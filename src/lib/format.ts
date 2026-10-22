@@ -6,14 +6,15 @@ export function formatKSh(amount: number): string {
 export const STORE = {
   freeDeliveryThreshold: 7500,
   deliveryFee: 350,
-  deliveryEstimate: "1–3 business days in Nairobi · 3–5 days countrywide",
+  deliveryEstimate: "Nairobi delivery 24–48 hrs · 3–5 days countrywide",
   handle: "@ciaocentral",
+  // WhatsApp number in international format without "+" (e.g. 2547XXXXXXXX). Empty until the owner supplies it.
+  whatsapp: "",
   // Social URLs left empty on purpose — add the real links when ready.
   socials: [
     { name: "TikTok", url: "" },
     { name: "Instagram", url: "" },
-    { name: "Facebook", url: "" },
-    { name: "Threads", url: "" },
+    { name: "WhatsApp", url: "" },
   ],
 };
 
