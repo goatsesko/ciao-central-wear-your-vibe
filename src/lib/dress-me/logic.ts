@@ -48,8 +48,8 @@ export function sanitizeOutfits(raw: Outfit[], allowed: Product[], budget: numbe
     const ids = Array.from(new Set(o.productIds)).filter((id) => byId.has(id));
     const slots: Record<string, string[]> = {};
     for (const id of ids) (slots[byId.get(id)!.tags.category] ??= []).push(id);
-    if (slots.top?.length !== 1 || slots.bottom?.length !== 1) continue;
-    if ((slots.layer?.length ?? 0) > 1 || (slots.accessory?.length ?? 0) > 1) continue;
+    if (slots["top"]?.length !== 1 || slots["bottom"]?.length !== 1) continue;
+    if ((slots["layer"]?.length ?? 0) > 1 || (slots["accessory"]?.length ?? 0) > 1) continue;
     const total = ids.reduce((s, id) => s + byId.get(id)!.price, 0);
     if (budget && total > budget) continue;
     const name = o.name.trim().slice(0, 60);
