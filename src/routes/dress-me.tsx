@@ -233,7 +233,10 @@ function OutfitCard({ outfit, byId, alternatives, size, requestId, index }: {
       add({ sku: v.sku, productId: p.id, slug: p.slug, name: p.name, image: p.images[0] ?? "", price: p.price, size: v.size, colour: v.colour, quantity: 1 });
       added++;
     }
-    if (!added) return toast.error("These pieces just sold out.");
+    if (!added) {
+      toast.error("These pieces just sold out.");
+      return;
+    }
     toast.success(`${outfit.name} added to your bag`);
     setOpen(true);
     if (requestId) record({ data: { requestId, outfit: { name: outfit.name, productIds: ids } } }).catch(() => {});
