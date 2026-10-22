@@ -3,6 +3,10 @@ import { deliveryFor, formatKSh } from "@/lib/format";
 import { listProducts } from "@/lib/catalog";
 
 describe("pricing", () => {
+  it("keeps sample tees within KSh 2,500–3,500 and hoodies within KSh 5,500–7,000", async () => {
+    for (const p of await listProducts({ category: "tees" })) expect(p.price >= 2500 && p.price <= 3500).toBe(true);
+    for (const p of await listProducts({ category: "hoodies" })) expect(p.price >= 5500 && p.price <= 7000).toBe(true);
+  });
   it("formats prices as KSh", () => {
     expect(formatKSh(2500)).toBe("KSh 2,500");
   });
@@ -14,6 +18,7 @@ describe("pricing", () => {
   });
   it("sorts products by price ascending", async () => {
     const items = await listProducts({ sort: "price-asc" });
-    expect(items.map((p) => p.price)).toEqual([2200, 2500, 5500]);
+    const prices = items.map((p) => p.price);
+    expect(prices).toEqual([...prices].sort((a, b) => a - b));
   });
 });
