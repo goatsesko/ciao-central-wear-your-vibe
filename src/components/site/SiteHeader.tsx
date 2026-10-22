@@ -1,7 +1,8 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Logo } from "./Logo";
+import { SearchOverlay } from "./SearchOverlay";
 import { useCart } from "@/lib/cart";
 import { formatKSh, STORE } from "@/lib/format";
 
@@ -14,15 +15,28 @@ const NAV = [
 ] as const;
 
 export function AnnouncementBar() {
-  const msg = `Free delivery on orders over ${formatKSh(STORE.freeDeliveryThreshold)} · M-Pesa accepted · More than clothes. It's a lifestyle.`;
+  const [paused, setPaused] = useState(false);
+  const msg = `Free delivery on orders over ${formatKSh(STORE.freeDeliveryThreshold)} · M-Pesa accepted · Nairobi delivery 24–48hrs`;
+  const Item = () => (
+    <span className="eyebrow flex shrink-0 items-center gap-8 px-4">
+      {msg} <span className="text-gold">✦</span>
+    </span>
+  );
   return (
-    <div className="overflow-hidden bg-ink py-2 text-ink-foreground" role="region" aria-label="Announcements">
+    <div
+      className="cursor-pointer overflow-hidden bg-ink py-2.5 text-ink-foreground"
+      role="region"
+      aria-label="Announcements"
+      onClick={() => setPaused((p) => !p)}
+      title={paused ? "Tap to play" : "Tap to pause"}
+    >
       <p className="sr-only">{msg}</p>
-      <div className="marquee flex w-max whitespace-nowrap" aria-hidden="true">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <span key={i} className="eyebrow px-8">
-            {msg} <span className="text-gold">✦</span>
-          </span>
+      <div className="marquee flex w-max" style={{ animationPlayState: paused ? "paused" : "running" }} aria-hidden="true">
+        {/* Two identical halves so the -50% loop is seamless */}
+        {[0, 1].map((h) => (
+          <div key={h} className="flex shrink-0">
+            <Item /><Item /><Item />
+          </div>
         ))}
       </div>
     </div>
@@ -33,16 +47,17 @@ export function SiteHeader() {
   const { count, setOpen } = useCart();
   const [menu, setMenu] = useState(false);
   const [searching, setSearching] = useState(false);
-  const [q, setQ] = useState("");
-  const navigate = useNavigate();
+  const closeSearch = useCallback(() => setSearching(false), []);
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-4 px-4 md:h-20 md:px-8">
-        <button className="-ml-2 p-2 lg:hidden" aria-label="Open menu" onClick={() => setMenu(true)}>
-          <Menu className="size-5" />
-        </button>
-        <Logo />
+      <div className="mx-auto grid h-16 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-2 md:h-20 md:px-8 lg:flex lg:justify-between">
+        <div className="flex items-center lg:hidden">
+          <button className="grid size-11 place-items-center" aria-label="Open menu" onClick={() => setMenu(true)}>
+            <Menu className="size-5" />
+          </button>
+        </div>
+        <Logo className="justify-self-center" />
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
           {NAV.map((n) => (
             <Link key={n.to} to={n.to} className="eyebrow link-underline py-1" activeProps={{ className: "text-foreground" }}>
@@ -50,17 +65,17 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-1">
-          <button className="p-2" aria-label="Search" aria-expanded={searching} onClick={() => setSearching((s) => !s)}>
+        <div className="flex items-center justify-end">
+          <button className="grid size-11 place-items-center" aria-label="Search" onClick={() => setSearching(true)}>
             <Search className="size-5" />
           </button>
-          <Link to="/support" className="hidden p-2 sm:inline-flex" aria-label="Account and support">
+          <Link to="/support" className="hidden size-11 place-items-center sm:grid" aria-label="Account and support">
             <User className="size-5" />
           </Link>
-          <button className="relative p-2" aria-label={`Open bag, ${count} items`} onClick={() => setOpen(true)}>
+          <button className="relative grid size-11 place-items-center" aria-label={`Open bag, ${count} items`} onClick={() => setOpen(true)}>
             <ShoppingBag className="size-5" />
             {count > 0 && (
-              <span className="absolute right-0 top-0 grid size-4 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+              <span className="absolute right-1 top-1 grid size-4 place-items-center rounded-full bg-gold text-[10px] font-bold text-ink">
                 {count}
               </span>
             )}
@@ -68,33 +83,13 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {searching && (
-        <form
-          role="search"
-          className="reveal border-t px-4 py-4 md:px-8"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSearching(false);
-            navigate({ to: "/shop", search: { q } });
-          }}
-        >
-          <label htmlFor="site-search" className="sr-only">Search products</label>
-          <input
-            id="site-search"
-            autoFocus
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search tees, denim…"
-            className="mx-auto block w-full max-w-3xl border-b border-foreground bg-transparent py-2 font-display text-2xl uppercase placeholder:text-muted-foreground focus:outline-none md:text-4xl"
-          />
-        </form>
-      )}
+      {searching && <SearchOverlay onClose={closeSearch} />}
 
       {menu && (
         <div className="fixed inset-0 z-50 flex flex-col bg-ink text-ink-foreground lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-          <div className="flex h-16 items-center justify-between px-4">
-            <span className="eyebrow text-silver">Menu</span>
-            <button className="p-2" aria-label="Close menu" onClick={() => setMenu(false)}>
+          <div className="flex h-16 items-center justify-between px-2">
+            <span className="eyebrow px-2 text-silver">Menu</span>
+            <button className="grid size-11 place-items-center" aria-label="Close menu" onClick={() => setMenu(false)}>
               <X className="size-6" />
             </button>
           </div>

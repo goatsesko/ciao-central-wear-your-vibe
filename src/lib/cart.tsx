@@ -19,6 +19,7 @@ type CartCtx = {
   setOpen: (o: boolean) => void;
   add: (line: CartLine) => void;
   remove: (sku: string) => void;
+  clear: () => void;
   setQty: (sku: string, qty: number) => void;
   count: number;
   subtotal: number;
@@ -58,6 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const remove = useCallback((sku: string) => setLines((p) => p.filter((l) => l.sku !== sku)), []);
+  const clear = useCallback(() => setLines([]), []);
   const setQty = useCallback(
     (sku: string, qty: number) =>
       setLines((p) => (qty <= 0 ? p.filter((l) => l.sku !== sku) : p.map((l) => (l.sku === sku ? { ...l, quantity: Math.min(MAX_QTY, qty) } : l)))),
@@ -68,11 +70,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const subtotal = lines.reduce((s, l) => s + l.price * l.quantity, 0);
     const delivery = deliveryFor(subtotal);
     return {
-      lines, open, setOpen, add, remove, setQty,
+      lines, open, setOpen, add, remove, clear, setQty,
       count: lines.reduce((s, l) => s + l.quantity, 0),
       subtotal, delivery, total: subtotal + delivery,
     };
-  }, [lines, open, add, remove, setQty]);
+  }, [lines, open, add, remove, clear, setQty]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

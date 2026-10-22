@@ -10,9 +10,10 @@ export * from "./types";
  */
 export const CATEGORIES = [
   { value: "all", label: "All" },
-  { value: "tees", label: "Tees" },
+  { value: "tees", label: "T-Shirts" },
+  { value: "hoodies", label: "Hoodies" },
+  { value: "pants", label: "Pants" },
   { value: "denim", label: "Denim" },
-  { value: "outerwear", label: "Outerwear" },
   { value: "accessories", label: "Accessories" },
 ];
 
@@ -34,6 +35,19 @@ export async function listProducts(query: ProductQuery = {}): Promise<Product[]>
     sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : b.createdAt.localeCompare(a.createdAt),
   );
   return query.limit ? items.slice(0, query.limit) : items;
+}
+
+/** Default variant for quick-add: first colour, size M if available, else first in-stock size. */
+export function quickAddVariant(p: Product) {
+  const colour = p.colours[0]?.name;
+  const avail = p.variants.filter((v) => v.colour === colour && v.stock !== "sold_out");
+  return avail.find((v) => v.size === "M") ?? avail[0] ?? null;
+}
+
+/** Products created within `days` of the newest product get a NEW tag. */
+export function isNew(p: Product, all: Product[], days = 14): boolean {
+  const newest = Math.max(...all.map((x) => Date.parse(x.createdAt)));
+  return newest - Date.parse(p.createdAt) <= days * 86400000;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {

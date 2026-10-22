@@ -9,7 +9,7 @@ export type Variant = {
   stock: StockStatus;
 };
 
-export type Category = "tees" | "denim" | "outerwear" | "accessories";
+export type Category = "tees" | "hoodies" | "pants" | "denim" | "accessories";
 
 export type Product = {
   id: string;
