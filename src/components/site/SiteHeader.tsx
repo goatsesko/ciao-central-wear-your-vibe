@@ -8,6 +8,7 @@ import { formatKSh, STORE } from "@/lib/format";
 
 const NAV = [
   { to: "/shop", label: "Shop" },
+  { to: "/dress-me", label: "Dress Me" },
   { to: "/apps", label: "Apps" },
   { to: "/about", label: "Story" },
   { to: "/team", label: "Team" },

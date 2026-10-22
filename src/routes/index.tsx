@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import hero from "@/assets/hero.jpg";
@@ -82,6 +82,9 @@ function Hero() {
           <Link to="/shop" className="btn btn-light">Shop the collection <ArrowRight className="size-4" /></Link>
           <Link to="/shop" search={{ sort: "newest" }} className="btn btn-outline-light">Explore new drops</Link>
         </div>
+        <Link to="/dress-me" className="btn reveal mt-4 w-full bg-gold text-ink hover:opacity-90 sm:w-auto" style={{ animationDelay: "380ms" }}>
+          <Sparkles className="size-4" /> Dress me
+        </Link>
       </div>
     </section>
   );
