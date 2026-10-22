@@ -18,7 +18,10 @@ export function ProductCard({ product, priority = false, isNew = false }: { prod
 
   const quickAdd = () => {
     const v = quickAddVariant(product);
-    if (!v) return toast.error("Sold out");
+    if (!v) {
+      toast.error("Sold out");
+      return;
+    }
     add({
       sku: v.sku, productId: product.id, slug: product.slug, name: product.name,
       image: product.images[0] ?? "", price: product.price, size: v.size, colour: v.colour, quantity: 1,

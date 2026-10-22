@@ -67,7 +67,7 @@ export function SiteFooter() {
             <ul className="grid grid-cols-2 md:grid-cols-1">
               {LINKS.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.to} hash={l.hash} className="flex min-h-11 items-center text-sm hover:text-gold">{l.label}</Link>
+                  <Link to={l.to} {...(l.hash ? { hash: l.hash } : {})} className="flex min-h-11 items-center text-sm hover:text-gold">{l.label}</Link>
                 </li>
               ))}
             </ul>
