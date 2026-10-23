@@ -14,3 +14,4 @@
 - Store settings (delivery fee/threshold, social URLs) live in `src/lib/format.ts` `STORE`; social URLs stay empty until the owner supplies them — never invent links.
 - Cart state lives in `src/lib/cart.tsx` (React context + localStorage); prices are integer KSh.
 - Shared chrome (announcement, header, footer, bag drawer) is rendered in `__root.tsx`; site components live in `src/components/site/`.
+- Product short-film media is configured in `src/lib/product-films.ts`; the homepage carousel uses posters until owner-supplied video URLs exist, so previews never imply playable clips.
