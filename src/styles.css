@@ -37,6 +37,10 @@
   --color-silver: var(--silver);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-mpesa: var(--mpesa);
+  --color-mc-red: var(--mc-red);
+  --color-mc-yellow: var(--mc-yellow);
+  --color-mc-orange: var(--mc-orange);
 }
 
 :root {
@@ -67,6 +71,10 @@
   --silver: oklch(0.78 0.005 250);
   --success: oklch(0.5 0.12 150);
   --warning: oklch(0.6 0.14 65);
+  --mpesa: oklch(0.63 0.2 141);
+  --mc-red: oklch(0.55 0.24 27);
+  --mc-yellow: oklch(0.79 0.16 72);
+  --mc-orange: oklch(0.68 0.19 45);
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
