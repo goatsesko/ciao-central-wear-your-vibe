@@ -18,7 +18,7 @@ export function ProductFilms() {
     update();
     query.addEventListener("change", update);
     const section = sectionRef.current;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.2 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry?.isIntersecting ?? false), { threshold: 0.2 });
     if (section) observer.observe(section);
     return () => { observer.disconnect(); query.removeEventListener("change", update); };
   }, []);
