@@ -18,6 +18,27 @@ export function TikTokIcon({ className }: P) {
   );
 }
 
+export function FacebookIcon({ className }: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm.7 4.3c-2.4 0-3.8 1.5-3.8 4v1.2H6.9v2.7h2v6.4h2.8v-6.4h2.2l.3-2.7h-2.5v-1.1c0-.8.3-1.3 1.3-1.3h1.4V7.6c-.6-.6-1.4-1.3-2.4-1.3Z"
+      />
+    </svg>
+  );
+}
+
+export function ThreadsIcon({ className }: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" className={className} aria-hidden="true">
+      <circle cx="11.6" cy="12.2" r="2.7" />
+      <path d="M14.9 9.1A5.7 5.7 0 1 0 17.9 13" />
+    </svg>
+  );
+}
+
 export function WhatsAppIcon({ className }: P) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -29,5 +50,7 @@ export function WhatsAppIcon({ className }: P) {
 export const SOCIAL_ICON: Record<string, (p: P) => React.JSX.Element> = {
   Instagram: InstagramIcon,
   TikTok: TikTokIcon,
+  Facebook: FacebookIcon,
+  Threads: ThreadsIcon,
   WhatsApp: WhatsAppIcon,
 };
