@@ -21,7 +21,7 @@ export function MastercardMark({ className = "" }: MarkProps) {
     <svg viewBox="0 0 76 32" className={className} aria-hidden="true">
       <defs>
         <clipPath id="cc-mc-overlap">
-          <circle cx="31" cy="12" r="8" />
+          <circle cx="31" cy="11" r="7.5" />
         </clipPath>
       </defs>
       <circle cx="31" cy="11" r="7.5" fill="var(--mc-red)" />
