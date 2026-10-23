@@ -30,19 +30,6 @@ export function SocialLinks({ className = "" }: { className?: string }) {
   );
 }
 
-function PaymentBadges() {
-  return (
-    <ul className="flex flex-wrap gap-2" aria-label="Payment methods">
-      <li className="rounded-sm bg-mpesa px-3 py-1.5 text-xs font-extrabold tracking-wide text-ink-foreground">M-PESA</li>
-      <li className="rounded-sm bg-ink-foreground px-3 py-1.5 text-xs font-extrabold italic tracking-wide text-visa">VISA</li>
-      <li className="flex items-center gap-1 rounded-sm bg-ink-foreground px-3 py-1.5" aria-label="Mastercard">
-        <span className="size-3.5 rounded-full bg-mc-red" />
-        <span className="-ml-2 size-3.5 rounded-full bg-mc-yellow opacity-90" />
-        <span className="ml-1 text-xs font-bold text-ink">mastercard</span>
-      </li>
-    </ul>
-  );
-}
 
 const LINKS = [
   { label: "Shop", to: "/shop" as const },
