@@ -15,7 +15,7 @@ export const Route = createFileRoute("/contact")({
   component: () => (
     <>
       <PageIntro eyebrow="Say ciao" title="Contact">
-        Contact details are coming soon. For now, find us on social at {STORE.handle}.
+        Tap any icon below to open our {STORE.handle} profile — we reply there.
       </PageIntro>
       <div className="mx-auto max-w-[1600px] px-4 pb-24 md:px-8">
         <SocialLinks />
