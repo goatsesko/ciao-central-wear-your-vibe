@@ -12,6 +12,7 @@ import { productsQuery, type Product } from "@/lib/catalog";
 import { ProductGrid } from "@/components/site/ProductCard";
 import { SocialLinks } from "@/components/site/SiteFooter";
 import { STORE } from "@/lib/format";
+import { ProductFilms } from "@/components/site/ProductFilms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,6 +21,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Premium Kenyan streetwear and lifestyle. Signature tees, denim and new drops. M-Pesa accepted." },
       { property: "og:title", content: "Ciao Central — Wear Your Vibe" },
       { property: "og:description", content: "More than clothes. It's a lifestyle. Premium Kenyan streetwear." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: ({ context }) =>
@@ -46,6 +49,7 @@ function Home() {
         to="tees"
       />
       <ProductSection eyebrow="Most wanted" title="Bestsellers" products={bestsellers} />
+      <ProductFilms />
       <Feature
         image={denim}
         eyebrow="Denim Collection"
