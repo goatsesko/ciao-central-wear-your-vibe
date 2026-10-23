@@ -4,11 +4,11 @@ type MarkProps = { className?: string };
 export function MpesaMark({ className = "" }: MarkProps) {
   return (
     <svg viewBox="0 0 76 32" className={className} aria-hidden="true">
-      <rect x="4" y="8" width="16" height="16" rx="4.5" fill="var(--mpesa)" />
-      <circle cx="8" cy="20" r="1.3" fill="var(--ink-foreground)" />
-      <path d="M8 16.5A3.5 3.5 0 0 1 11.5 20" fill="none" stroke="var(--ink-foreground)" strokeWidth="1.4" strokeLinecap="round" />
-      <path d="M8 13.5A6.5 6.5 0 0 1 14.5 20" fill="none" stroke="var(--ink-foreground)" strokeWidth="1.4" strokeLinecap="round" />
-      <text x="24" y="21" fill="var(--mpesa)" fontFamily="Manrope, system-ui, sans-serif" fontSize="12" fontWeight="700" letterSpacing="-0.4">
+      <rect x="30" y="3" width="15" height="15" rx="4" fill="var(--mpesa)" />
+      <circle cx="33.5" cy="14.5" r="1.2" fill="var(--ink-foreground)" />
+      <path d="M33.5 11.3A3.2 3.2 0 0 1 36.7 14.5" fill="none" stroke="var(--ink-foreground)" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M33.5 8.5A6 6 0 0 1 39.5 14.5" fill="none" stroke="var(--ink-foreground)" strokeWidth="1.3" strokeLinecap="round" />
+      <text x="38" y="28" textAnchor="middle" fill="var(--mpesa)" fontFamily="Manrope, system-ui, sans-serif" fontSize="10" fontWeight="700" letterSpacing="-0.2">
         M-PESA
       </text>
     </svg>
@@ -24,12 +24,12 @@ export function MastercardMark({ className = "" }: MarkProps) {
           <circle cx="31" cy="12" r="8" />
         </clipPath>
       </defs>
-      <circle cx="31" cy="12" r="8" fill="var(--mc-red)" />
-      <circle cx="45" cy="12" r="8" fill="var(--mc-yellow)" />
-      <circle cx="45" cy="12" r="8" fill="var(--mc-orange)" clipPath="url(#cc-mc-overlap)" />
+      <circle cx="31" cy="11" r="7.5" fill="var(--mc-red)" />
+      <circle cx="45" cy="11" r="7.5" fill="var(--mc-yellow)" />
+      <circle cx="45" cy="11" r="7.5" fill="var(--mc-orange)" clipPath="url(#cc-mc-overlap)" />
       <text
         x="38"
-        y="29"
+        y="28"
         textAnchor="middle"
         fill="var(--ink)"
         fontFamily="Manrope, system-ui, sans-serif"
