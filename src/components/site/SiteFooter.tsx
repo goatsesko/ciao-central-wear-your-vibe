@@ -68,6 +68,7 @@ export function SiteFooter() {
             <div>
               <p className="eyebrow mb-3 text-gold">We accept</p>
               <PaymentBadges />
+              <p className="mt-3 text-xs text-silver">M-Pesa &amp; Mastercard · all prices in KSh</p>
             </div>
           </div>
         </div>
