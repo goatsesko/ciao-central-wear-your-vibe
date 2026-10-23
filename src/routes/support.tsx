@@ -35,7 +35,7 @@ function Support() {
           <Accordion type="single" collapsible className="mt-6">
             <AccordionItem value="pay">
               <AccordionTrigger>How can I pay?</AccordionTrigger>
-              <AccordionContent>We accept M-Pesa. More payment options may be added later.</AccordionContent>
+              <AccordionContent>We accept M-Pesa and Mastercard.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="sample">
               <AccordionTrigger>What does "Sample" mean on a product?</AccordionTrigger>

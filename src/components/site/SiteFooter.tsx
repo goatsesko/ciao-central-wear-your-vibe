@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { SOCIAL_ICON } from "./BrandIcons";
+import { PaymentBadges } from "./PaymentBadges";
 import { whatsappUrl } from "./WhatsAppButton";
 import { STORE } from "@/lib/format";
 
