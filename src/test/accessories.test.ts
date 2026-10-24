@@ -9,6 +9,7 @@ describe("branded accessories", () => {
     expect(names).toContain("hat");
     expect(names).toContain("socks");
     expect(names).toContain("sneakers");
+    expect(names).toContain("scarf");
   });
 
   it("carries the CC brand mark in every accessory name", () => {
