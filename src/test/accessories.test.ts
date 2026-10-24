@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { defaultSize } from "@/lib/catalog";
 import { SAMPLE_PRODUCTS } from "@/lib/catalog/sample-data";
 
 const accessories = SAMPLE_PRODUCTS.filter((p) => p.category === "accessories");

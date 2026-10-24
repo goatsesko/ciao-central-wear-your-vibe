@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
-import { productQuery, relatedQuery, STOCK_LABEL, type StockStatus } from "@/lib/catalog";
+import { defaultSize, productQuery, relatedQuery, STOCK_LABEL, type StockStatus } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import { formatKSh, STORE } from "@/lib/format";
 import { ProductGrid } from "@/components/site/ProductCard";
@@ -53,7 +53,7 @@ function ProductPage() {
 
   const [active, setActive] = useState(0);
   const [colour, setColour] = useState(product.colours[0]?.name ?? "");
-  const [size, setSize] = useState<string | null>(null);
+  const [size, setSize] = useState<string | null>(defaultSize(product));
   const [qty, setQty] = useState(1);
 
   const variant = size ? product.variants.find((v) => v.size === size && v.colour === colour) : undefined;
