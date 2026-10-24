@@ -13,6 +13,7 @@ import { ProductGrid } from "@/components/site/ProductCard";
 import { SocialLinks } from "@/components/site/SiteFooter";
 import { STORE } from "@/lib/format";
 import { ProductFilms } from "@/components/site/ProductFilms";
+import { PartnerStrip } from "@/components/site/PartnerStrip";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -166,6 +167,7 @@ function Story() {
           <Link to="/about" className="eyebrow link-underline mt-10 inline-block py-1">Read our story →</Link>
         </div>
       </div>
+      <PartnerStrip className="mx-auto max-w-[1600px]" />
     </section>
   );
 }
