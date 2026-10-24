@@ -22,6 +22,7 @@ describe("branded accessories", () => {
     expect(byName["CC Bucket Hat"]).toBe(2200);
     expect(byName["CC Crew Socks"]).toBe(1200);
     expect(byName["CC Low-Top Sneakers"]).toBe(7500);
+    expect(byName["CC Wool-Blend Scarf"]).toBe(2800);
   });
 
   it("keeps every accessory marked as a sample", () => {
