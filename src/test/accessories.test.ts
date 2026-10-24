@@ -29,4 +29,13 @@ describe("branded accessories", () => {
   it("keeps every accessory marked as a sample", () => {
     expect(accessories.every((p) => p.isSample)).toBe(true);
   });
+
+  it("pre-picks the size on one-size pieces so they bag at once", () => {
+    const scarf = accessories.find((p) => p.name === "CC Wool-Blend Scarf")!;
+    expect(defaultSize(scarf)).toBe("One size");
+    const cap = accessories.find((p) => p.name === "CC Dad Cap")!;
+    expect(defaultSize(cap)).toBe("One size");
+    const tee = SAMPLE_PRODUCTS.find((p) => p.name === "Black Oversized CC T-Shirt")!;
+    expect(defaultSize(tee)).toBeNull();
+  });
 });
