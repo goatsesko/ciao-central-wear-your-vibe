@@ -44,6 +44,11 @@ export function quickAddVariant(p: Product) {
   return avail.find((v) => v.size === "M") ?? avail[0] ?? null;
 }
 
+/** One-size items (caps, socks, scarves) arrive pre-picked so they can be bagged at once. */
+export function defaultSize(p: Product): string | null {
+  return p.sizes.length === 1 ? (p.sizes[0] ?? null) : null;
+}
+
 /** Products created within `days` of the newest product get a NEW tag. */
 export function isNew(p: Product, all: Product[], days = 14): boolean {
   const newest = Math.max(...all.map((x) => Date.parse(x.createdAt)));

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { defaultSize } from "@/lib/catalog";
 import { SAMPLE_PRODUCTS } from "@/lib/catalog/sample-data";
 
 const accessories = SAMPLE_PRODUCTS.filter((p) => p.category === "accessories");
@@ -9,6 +10,7 @@ describe("branded accessories", () => {
     expect(names).toContain("hat");
     expect(names).toContain("socks");
     expect(names).toContain("sneakers");
+    expect(names).toContain("scarf");
   });
 
   it("carries the CC brand mark in every accessory name", () => {
@@ -21,9 +23,19 @@ describe("branded accessories", () => {
     expect(byName["CC Bucket Hat"]).toBe(2200);
     expect(byName["CC Crew Socks"]).toBe(1200);
     expect(byName["CC Low-Top Sneakers"]).toBe(7500);
+    expect(byName["CC Wool-Blend Scarf"]).toBe(2800);
   });
 
   it("keeps every accessory marked as a sample", () => {
     expect(accessories.every((p) => p.isSample)).toBe(true);
+  });
+
+  it("pre-picks the size on one-size pieces so they bag at once", () => {
+    const scarf = accessories.find((p) => p.name === "CC Wool-Blend Scarf")!;
+    expect(defaultSize(scarf)).toBe("One size");
+    const cap = accessories.find((p) => p.name === "CC Dad Cap")!;
+    expect(defaultSize(cap)).toBe("One size");
+    const tee = SAMPLE_PRODUCTS.find((p) => p.name === "Black Oversized CC T-Shirt")!;
+    expect(defaultSize(tee)).toBeNull();
   });
 });

@@ -8,6 +8,7 @@ import ccHat from "@/assets/cc-hat.jpg";
 import ccBucketHat from "@/assets/cc-bucket-hat.jpg";
 import ccSocks from "@/assets/cc-socks.jpg";
 import ccShoes from "@/assets/cc-shoes.jpg";
+import ccScarf from "@/assets/cc-scarf.jpg";
 import campaign1 from "@/assets/campaign-1.jpg";
 import campaign2 from "@/assets/campaign-2.jpg";
 import type { Colour, Product, StockStatus, Variant } from "./types";
@@ -154,5 +155,15 @@ export const SAMPLE_PRODUCTS: Product[] = [
     variants: variants("CC-ACC-SHO", [BLACK], { "39": "sold_out", "45": "low" }, ["39", "40", "41", "42", "43", "44", "45"]),
     tags: { occasion: ["date","party","casual","campus","work"], vibe: ["streetwear","bold"], color: ["black"], fit: "true to size", season: "all-year", category: "accessory" },
     createdAt: "2026-10-24T00:00:00Z",
+  },
+  {
+    id: "p14", slug: "sample-cc-wool-blend-scarf", name: "CC Wool-Blend Scarf", isSample: true,
+    category: "accessories", collections: ["new"], price: 2800,
+    description: "Sample product. A brushed wool-blend scarf in black with fringed ends and a gold CC at one corner.",
+    details: ["Sample description — replace with real fabric details", "Fringed ends", "One size"],
+    images: [ccScarf], colours: [BLACK, CHARCOAL], sizes: ["One size"],
+    variants: variants("CC-ACC-SCF", [BLACK, CHARCOAL], {}, ["One size"]),
+    tags: { occasion: ["casual","church","work","date"], vibe: ["minimal","streetwear"], color: ["black","charcoal"], fit: "one size", season: "cool evenings", category: "accessory" },
+    createdAt: "2026-10-24T06:09:00Z",
   },
 ];
