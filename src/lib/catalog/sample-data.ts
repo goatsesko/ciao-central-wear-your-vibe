@@ -4,6 +4,10 @@ import denimBlack from "@/assets/denim-black.jpg";
 import hoodieBlack from "@/assets/hoodie-black.jpg";
 import pantsCargo from "@/assets/pants-cargo.jpg";
 import accessoriesCap from "@/assets/accessories-cap.jpg";
+import ccHat from "@/assets/cc-hat.jpg";
+import ccBucketHat from "@/assets/cc-bucket-hat.jpg";
+import ccSocks from "@/assets/cc-socks.jpg";
+import ccShoes from "@/assets/cc-shoes.jpg";
 import campaign1 from "@/assets/campaign-1.jpg";
 import campaign2 from "@/assets/campaign-2.jpg";
 import type { Colour, Product, StockStatus, Variant } from "./types";
@@ -88,7 +92,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     category: "accessories", collections: ["new"], price: 1800,
     description: "Sample product. A six-panel cotton cap with a curved brim and small gold CC embroidery.",
     details: ["Sample description — replace with real fabric details", "Adjustable strap", "One size"],
-    images: [accessoriesCap], colours: [BLACK], sizes: ["One size"],
+    images: [ccHat], colours: [BLACK], sizes: ["One size"],
     variants: variants("CC-ACC-CAP", [BLACK], {}, ["One size"]), tags: { occasion: ["casual","campus","party"], vibe: ["streetwear"], color: ["black"], fit: "one size", season: "all-year", category: "accessory" },
     createdAt: "2026-10-14T00:00:00Z",
   },
@@ -120,5 +124,35 @@ export const SAMPLE_PRODUCTS: Product[] = [
     variants: variants("CC-PNT-TLR", [CHARCOAL, BLACK]),
     tags: { occasion: ["work","church","date"], vibe: ["smart","minimal"], color: ["charcoal","black"], fit: "tailored", season: "all-year", category: "bottom" },
     createdAt: "2026-09-25T00:00:00Z",
+  },
+  {
+    id: "p11", slug: "sample-cc-bucket-hat", name: "CC Bucket Hat", isSample: true,
+    category: "accessories", collections: ["new"], price: 2200,
+    description: "Sample product. A washed black cotton bucket hat with a gold CC monogram stitched at the side.",
+    details: ["Sample description — replace with real fabric details", "Washed cotton canvas", "One size"],
+    images: [ccBucketHat], colours: [BLACK], sizes: ["One size"],
+    variants: variants("CC-ACC-BKT", [BLACK], {}, ["One size"]),
+    tags: { occasion: ["casual","campus","party"], vibe: ["streetwear","bold"], color: ["black"], fit: "one size", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-22T00:00:00Z",
+  },
+  {
+    id: "p12", slug: "sample-cc-crew-socks", name: "CC Crew Socks", isSample: true,
+    category: "accessories", collections: ["new"], price: 1200,
+    description: "Sample product. Ribbed black crew socks with a white CC embroidered at the cuff.",
+    details: ["Sample description — replace with real fabric details", "Ribbed knit", "One size"],
+    images: [ccSocks], colours: [BLACK, WHITE], sizes: ["One size"],
+    variants: variants("CC-ACC-SCK", [BLACK, WHITE], {}, ["One size"]),
+    tags: { occasion: ["casual","campus","work","church"], vibe: ["minimal","streetwear"], color: ["black","white"], fit: "one size", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-23T00:00:00Z",
+  },
+  {
+    id: "p13", slug: "sample-cc-low-top-sneakers", name: "CC Low-Top Sneakers", isSample: true,
+    category: "accessories", collections: ["new", "bestseller"], price: 7500,
+    description: "Sample product. Matte black leather low-tops with a gold CC on the side panel and an off-white sole.",
+    details: ["Sample description — replace with real material details", "Leather upper", "Off-white rubber sole"],
+    images: [ccShoes], colours: [BLACK], sizes: ["39", "40", "41", "42", "43", "44", "45"],
+    variants: variants("CC-ACC-SHO", [BLACK], { "39": "sold_out", "45": "low" }, ["39", "40", "41", "42", "43", "44", "45"]),
+    tags: { occasion: ["date","party","casual","campus","work"], vibe: ["streetwear","bold"], color: ["black"], fit: "true to size", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-24T00:00:00Z",
   },
 ];
