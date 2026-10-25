@@ -10,6 +10,8 @@ export const Route = createFileRoute("/support")({
       { name: "description", content: "Ciao Central help: FAQs, delivery in Kenya, returns and size guide." },
       { property: "og:title", content: "Support — Ciao Central" },
       { property: "og:description", content: "FAQs, delivery, returns and size guide." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Support,
