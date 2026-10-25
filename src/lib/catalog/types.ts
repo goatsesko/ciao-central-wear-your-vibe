@@ -9,7 +9,7 @@ export type Variant = {
   stock: StockStatus;
 };
 
-export type Category = "tees" | "hoodies" | "pants" | "denim" | "accessories";
+export type Category = "tees" | "hoodies" | "pants" | "denim" | "accessories" | "jewellery" | "footwear" | "traditional";
 
 export type Occasion = "date" | "church" | "work" | "party" | "casual" | "campus";
 export type Vibe = "streetwear" | "smart" | "minimal" | "bold";
@@ -35,6 +35,7 @@ export type Product = {
   price: number; // KSh, integer
   description: string;
   details: string[];
+  includedItems?: string[];
   images: string[];
   colours: Colour[];
   sizes: string[];

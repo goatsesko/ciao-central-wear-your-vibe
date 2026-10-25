@@ -15,6 +15,9 @@ export const CATEGORIES = [
   { value: "pants", label: "Pants" },
   { value: "denim", label: "Denim" },
   { value: "accessories", label: "Accessories" },
+  { value: "jewellery", label: "Chains & Bracelets" },
+  { value: "footwear", label: "Shoes & Sandals" },
+  { value: "traditional", label: "Traditional Attire" },
 ];
 
 export async function listProducts(query: ProductQuery = {}): Promise<Product[]> {
@@ -22,14 +25,15 @@ export async function listProducts(query: ProductQuery = {}): Promise<Product[]>
   const q = query.q?.trim().toLowerCase();
   if (q) items = items.filter((p) => `${p.name} ${p.description} ${p.category}`.toLowerCase().includes(q));
   if (query.category && query.category !== "all") items = items.filter((p) => p.category === query.category);
-  if (query.collection) items = items.filter((p) => p.collections.includes(query.collection!));
-  if (query.minPrice != null) items = items.filter((p) => p.price >= query.minPrice!);
-  if (query.maxPrice != null) items = items.filter((p) => p.price <= query.maxPrice!);
-  if (query.sizes?.length)
+  const { collection, minPrice, maxPrice, sizes, colours } = query;
+  if (collection) items = items.filter((p) => p.collections.includes(collection));
+  if (minPrice != null) items = items.filter((p) => p.price >= minPrice);
+  if (maxPrice != null) items = items.filter((p) => p.price <= maxPrice);
+  if (sizes?.length)
     items = items.filter((p) =>
-      p.variants.some((v) => query.sizes!.includes(v.size) && v.stock !== "sold_out"),
+      p.variants.some((v) => sizes.includes(v.size) && v.stock !== "sold_out"),
     );
-  if (query.colours?.length) items = items.filter((p) => p.colours.some((c) => query.colours!.includes(c.name)));
+  if (colours?.length) items = items.filter((p) => p.colours.some((c) => colours.includes(c.name)));
   const sort = query.sort ?? "newest";
   items.sort((a, b) =>
     sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : b.createdAt.localeCompare(a.createdAt),

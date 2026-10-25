@@ -1,5 +1,8 @@
 # Roadmap
 
+## Current collection expansion
+- Add chains, Kenya bracelet at KSh 500 per piece, Maasai tyre sandals and a complete Maasai set with a single bag action.
+
 ## Open (blocked on the owner)
 - WhatsApp chat button + footer icon: needs the store's phone number.
 - Partners strip: needs real partner names and logo files (currently labelled samples).
