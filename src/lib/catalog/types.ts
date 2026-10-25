@@ -36,6 +36,7 @@ export type Product = {
   description: string;
   details: string[];
   includedItems?: string[];
+  priceBreakdown?: { name: string; quantity: number; unitPrice: number }[];
   images: string[];
   colours: Colour[];
   sizes: string[];

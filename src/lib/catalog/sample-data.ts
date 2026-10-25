@@ -209,6 +209,12 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description: "Sample complete-look concept. Red-and-blue checked shuka wraps, a beaded necklace, a beaded bracelet and tyre-made akala sandals together in one set. Choose your sandal size. Final contents, fit and set price to be confirmed.",
     details: ["One complete set per quantity", "Wraps: one-size concept; sandal size selected below", "Sample price and AI-generated image"],
     includedItems: ["Two checked shuka wraps", "Beaded necklace", "Beaded bracelet", "One pair of Maasai tyre sandals"],
+    priceBreakdown: [
+      { name: "Checked shuka wrap", quantity: 2, unitPrice: 1500 },
+      { name: "Beaded necklace", quantity: 1, unitPrice: 1500 },
+      { name: "Beaded bracelet", quantity: 1, unitPrice: 500 },
+      { name: "Maasai tyre sandals (pair)", quantity: 1, unitPrice: 1500 },
+    ],
     images: [maasaiLook, maasaiSandals], colours: [RED_CHECK], sizes: ["39", "40", "41", "42", "43", "44", "45"],
     variants: variants("CC-HRT-SET", [RED_CHECK], {}, ["39", "40", "41", "42", "43", "44", "45"]),
     tags: { occasion: ["casual", "party"], vibe: ["bold"], color: ["red", "blue", "black"], fit: "wrap fit", season: "all-year", category: "layer" },
