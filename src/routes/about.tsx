@@ -9,6 +9,8 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "The story behind Ciao Central, a Kenyan streetwear and lifestyle brand." },
       { property: "og:title", content: "Our Story — Ciao Central" },
       { property: "og:description", content: "More than clothes. It's a lifestyle." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

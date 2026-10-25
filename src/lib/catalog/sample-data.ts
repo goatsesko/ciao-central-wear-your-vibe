@@ -9,6 +9,10 @@ import ccBucketHat from "@/assets/cc-bucket-hat.jpg";
 import ccSocks from "@/assets/cc-socks.jpg";
 import ccShoes from "@/assets/cc-shoes.jpg";
 import ccScarf from "@/assets/cc-scarf.jpg";
+import kenyaBracelet from "@/assets/kenya-bracelet.jpg";
+import ccChain from "@/assets/cc-chain.jpg";
+import maasaiSandals from "@/assets/maasai-tyre-sandals.jpg";
+import maasaiLook from "@/assets/maasai-complete-look.jpg";
 import campaign1 from "@/assets/campaign-1.jpg";
 import campaign2 from "@/assets/campaign-2.jpg";
 import type { Colour, Product, StockStatus, Variant } from "./types";
@@ -19,6 +23,9 @@ const BLACK: Colour = { name: "Black", hex: "#111111" };
 const WHITE: Colour = { name: "White", hex: "#f5f5f2" };
 const CHARCOAL: Colour = { name: "Charcoal", hex: "#3a3a3a" };
 const SAND: Colour = { name: "Sand", hex: "#cbbfa8" };
+const GOLD: Colour = { name: "Gold tone", hex: "#C9A84C" };
+const KENYA: Colour = { name: "Kenya colours", hex: "#177245" };
+const RED_CHECK: Colour = { name: "Red & blue check", hex: "#b8202b" };
 
 function variants(prefix: string, colours: Colour[], stock: Record<string, StockStatus> = {}, sizes = SIZES): Variant[] {
   return colours.flatMap((c) =>
@@ -31,7 +38,7 @@ function variants(prefix: string, colours: Colour[], stock: Record<string, Stock
   );
 }
 
-// SAMPLE catalogue — placeholder products, images and prices for layout only.
+// SAMPLE catalogue — placeholder products and imagery; bracelet price is owner-supplied.
 // Replace with real data (e.g. from the database) before launch.
 export const SAMPLE_PRODUCTS: Product[] = [
   {
@@ -165,5 +172,46 @@ export const SAMPLE_PRODUCTS: Product[] = [
     variants: variants("CC-ACC-SCF", [BLACK, CHARCOAL], {}, ["One size"]),
     tags: { occasion: ["casual","church","work","date"], vibe: ["minimal","streetwear"], color: ["black","charcoal"], fit: "one size", season: "cool evenings", category: "accessory" },
     createdAt: "2026-10-24T06:09:00Z",
+  },
+  {
+    id: "p15", slug: "sample-kenya-beaded-bracelet", name: "Kenya Beaded Bracelet", isSample: true,
+    category: "jewellery", collections: ["new", "kenyan-heritage"], price: 500,
+    description: "Kenya flag colours, worn your way. A beaded bracelet in black, red, green and white. KSh 500 per piece. Sample image; final product details to be confirmed.",
+    details: ["Price per bracelet: KSh 500", "Adjustable fit concept", "Sample image — actual beadwork to be confirmed"],
+    images: [kenyaBracelet], colours: [KENYA], sizes: ["One size"],
+    variants: variants("CC-JWL-KEN", [KENYA], {}, ["One size"]),
+    tags: { occasion: ["casual", "campus", "party", "church"], vibe: ["bold", "streetwear"], color: ["black", "red", "green", "white"], fit: "adjustable", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-25T09:36:00Z",
+  },
+  {
+    id: "p16", slug: "sample-cc-curb-chain", name: "CC Curb Chain", isSample: true,
+    category: "jewellery", collections: ["new"], price: 1800,
+    description: "Sample concept. A gold-tone curb chain with a CC pendant. Material, length and final price to be confirmed; not a claim of solid gold.",
+    details: ["Gold-tone finish concept", "CC pendant", "Sample price and image"],
+    images: [ccChain], colours: [GOLD], sizes: ["One size"],
+    variants: variants("CC-JWL-CHN", [GOLD], {}, ["One size"]),
+    tags: { occasion: ["date", "party", "casual", "campus"], vibe: ["bold", "streetwear"], color: ["gold"], fit: "one size", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-25T09:35:00Z",
+  },
+  {
+    id: "p17", slug: "sample-maasai-tyre-sandals", name: "Maasai Tyre Sandals — Akala", isSample: true,
+    category: "footwear", collections: ["new", "kenyan-heritage"], price: 1500,
+    description: "Sample concept. Traditional akala sandals with tyre-made soles and simple black straps. Final construction, sizing and price to be confirmed.",
+    details: ["Tyre-made sole concept", "Price shown per pair", "EU shoe sizes — sample sizing"],
+    images: [maasaiSandals], colours: [BLACK], sizes: ["39", "40", "41", "42", "43", "44", "45"],
+    variants: variants("CC-HRT-AKA", [BLACK], {}, ["39", "40", "41", "42", "43", "44", "45"]),
+    tags: { occasion: ["casual", "party"], vibe: ["bold", "minimal"], color: ["black"], fit: "true to size", season: "all-year", category: "accessory" },
+    createdAt: "2026-10-25T09:34:00Z",
+  },
+  {
+    id: "p18", slug: "sample-complete-maasai-outfit", name: "Complete Maasai Outfit", isSample: true,
+    category: "traditional", collections: ["new", "kenyan-heritage"], price: 6500,
+    description: "Sample complete-look concept. Red-and-blue checked shuka wraps, a beaded necklace, a beaded bracelet and tyre-made akala sandals together in one set. Choose your sandal size. Final contents, fit and set price to be confirmed.",
+    details: ["One complete set per quantity", "Wraps: one-size concept; sandal size selected below", "Sample price and AI-generated image"],
+    includedItems: ["Two checked shuka wraps", "Beaded necklace", "Beaded bracelet", "One pair of Maasai tyre sandals"],
+    images: [maasaiLook, maasaiSandals], colours: [RED_CHECK], sizes: ["39", "40", "41", "42", "43", "44", "45"],
+    variants: variants("CC-HRT-SET", [RED_CHECK], {}, ["39", "40", "41", "42", "43", "44", "45"]),
+    tags: { occasion: ["casual", "party"], vibe: ["bold"], color: ["red", "blue", "black"], fit: "wrap fit", season: "all-year", category: "layer" },
+    createdAt: "2026-10-25T09:33:00Z",
   },
 ];

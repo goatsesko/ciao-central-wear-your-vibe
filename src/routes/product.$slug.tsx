@@ -8,6 +8,7 @@ import { formatKSh, STORE } from "@/lib/format";
 import { ProductGrid } from "@/components/site/ProductCard";
 import { QtyControl } from "@/components/site/CartDrawer";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/product/$slug")({
   loader: async ({ context, params }) => {
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/product/$slug")({
             { property: "og:title", content: `${loaderData.name} — Ciao Central` },
             { property: "og:description", content: loaderData.description },
             { property: "og:type", content: "product" },
+            { name: "twitter:card", content: "summary_large_image" },
           ],
           links: [{ rel: "canonical", href: `/product/${params.slug}` }],
         }
@@ -47,7 +49,11 @@ const stockClass: Record<StockStatus, string> = {
 function ProductPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(productQuery(slug));
-  const product = data!; // loader throws notFound() when missing
+  if (!data) throw notFound();
+  return <ProductDetails key={data.id} product={data} />;
+}
+
+function ProductDetails({ product }: { product: import("@/lib/catalog").Product }) {
   const { data: related } = useSuspenseQuery(relatedQuery(product));
   const { add } = useCart();
 
@@ -107,6 +113,14 @@ function ProductPage() {
           <h1 className="mt-4 text-5xl md:text-7xl">{product.name}</h1>
           <p className="mt-4 text-xl font-semibold">{formatKSh(product.price)}</p>
           <p className="mt-6 leading-relaxed text-muted-foreground">{product.description}</p>
+          {product.includedItems && (
+            <section className="mt-6 border-y py-5" aria-label="Included in this set">
+              <h2 className="eyebrow mb-3">The complete look</h2>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {product.includedItems.map((item) => <li key={item}>— {item}</li>)}
+              </ul>
+            </section>
+          )}
 
           <fieldset className="mt-8">
             <legend className="eyebrow mb-3">Colour — <span className="text-muted-foreground">{colour}</span></legend>
@@ -122,7 +136,7 @@ function ProductPage() {
 
           <fieldset className="mt-8">
             <div className="mb-3 flex justify-between">
-              <legend className="eyebrow">Size</legend>
+              <legend className="eyebrow">{product.includedItems || product.category === "footwear" ? "Sandal size (EU)" : "Size"}</legend>
               <Link to="/support" hash="size-guide" className="eyebrow link-underline text-muted-foreground">Size guide</Link>
             </div>
             <div className="grid grid-cols-5 gap-2">
@@ -151,9 +165,9 @@ function ProductPage() {
 
           <div className="mt-6 flex gap-3">
             <QtyControl value={qty} onChange={(n) => setQty(Math.max(1, n))} label={product.name} />
-            <button onClick={addToBag} disabled={stock === "sold_out"} className="btn btn-solid flex-1">
-              {stock === "sold_out" ? "Sold out" : "Add to bag"}
-            </button>
+            <Button onClick={addToBag} disabled={stock === "sold_out"} className="btn btn-solid h-auto whitespace-normal rounded-none flex-1">
+              {stock === "sold_out" ? "Sold out" : product.includedItems ? "Add complete look to bag" : "Add to bag"}
+            </Button>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
             Free delivery over {formatKSh(STORE.freeDeliveryThreshold)} · M-Pesa accepted · {STORE.deliveryEstimate}

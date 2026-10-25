@@ -33,6 +33,8 @@ export const Route = createFileRoute("/shop")({
       { name: "description", content: "Shop Ciao Central streetwear: signature tees, denim and new drops. Prices in KSh, M-Pesa accepted." },
       { property: "og:title", content: "Shop — Ciao Central" },
       { property: "og:description", content: "Signature tees, denim and new drops from Ciao Central." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/shop" }],
   }),

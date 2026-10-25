@@ -10,6 +10,8 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Get in touch with Ciao Central." },
       { property: "og:title", content: "Contact — Ciao Central" },
       { property: "og:description", content: "Get in touch with Ciao Central." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

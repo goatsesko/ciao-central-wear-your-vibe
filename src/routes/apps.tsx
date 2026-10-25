@@ -8,6 +8,8 @@ export const Route = createFileRoute("/apps")({
       { name: "description", content: "Digital products and apps from the Ciao Central lifestyle universe." },
       { property: "og:title", content: "Apps — Ciao Central" },
       { property: "og:description", content: "Digital products from Ciao Central." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
