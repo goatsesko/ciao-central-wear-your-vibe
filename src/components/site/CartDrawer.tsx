@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Minus, Plus, X } from "lucide-react";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { productsQuery, setPriceBreakdown } from "@/lib/catalog";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { MAX_QTY, useCart } from "@/lib/cart";
 import { formatKSh, STORE } from "@/lib/format";
@@ -8,6 +10,7 @@ import { formatKSh, STORE } from "@/lib/format";
 export function CartDrawer() {
   const { lines, open, setOpen, remove, setQty, subtotal, delivery, total } = useCart();
   const toFree = STORE.freeDeliveryThreshold - subtotal;
+  const { data: products = [] } = useQuery({ ...productsQuery(), enabled: open });
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -36,7 +39,10 @@ export function CartDrawer() {
         ) : (
           <>
             <ul className="flex-1 divide-y overflow-y-auto px-6">
-              {lines.map((l) => (
+              {lines.map((l) => {
+                const product = products.find((p) => p.id === l.productId);
+                const breakdown = product ? setPriceBreakdown(product, l.quantity) : [];
+                return (
                 <li key={l.sku} className="flex gap-4 py-5">
                   <img src={l.image} alt={l.name} width={80} height={104} className="h-26 w-20 bg-muted object-cover" />
                   <div className="flex flex-1 flex-col">
@@ -49,13 +55,30 @@ export function CartDrawer() {
                       </button>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">{l.colour} · {l.size} · {l.sku}</p>
+                     {breakdown.length > 0 && (
+                       <div className="mt-3 border-y py-3">
+                         <p className="eyebrow mb-2">Included pieces</p>
+                         <ul className="space-y-2 text-xs" aria-label={`Price breakdown for ${l.name}`}>
+                           {breakdown.map((item) => (
+                             <li key={item.name} className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                               <span className="min-w-0 flex-1 text-muted-foreground">
+                                 {item.name}<span className="block">{item.quantity} × {formatKSh(item.unitPrice)}</span>
+                               </span>
+                               <span className="shrink-0 font-semibold">{formatKSh(item.total)}</span>
+                             </li>
+                           ))}
+                         </ul>
+                         {product?.isSample && <p className="mt-2 text-xs text-muted-foreground">Sample prices · bracelet KSh 500 each</p>}
+                       </div>
+                     )}
                     <div className="mt-auto flex items-center justify-between pt-3">
                       <QtyControl value={l.quantity} onChange={(q) => setQty(l.sku, q)} label={l.name} />
                       <span className="text-sm font-semibold">{formatKSh(l.price * l.quantity)}</span>
                     </div>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
             <div className="space-y-2 border-t p-6 text-sm">
               <Row label="Subtotal" value={formatKSh(subtotal)} />

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { defaultSize, listProducts, getProductBySlug } from "@/lib/catalog";
+import { defaultSize, listProducts, getProductBySlug, setPriceBreakdown } from "@/lib/catalog";
 
 describe("Kenyan collection", () => {
   it("prices one Kenya bracelet at exactly KSh 500", async () => {
@@ -18,5 +18,21 @@ describe("Kenyan collection", () => {
     expect(jewellery.map((p) => p.id)).toContain("p16");
     const footwear = await listProducts({ category: "footwear" });
     expect(footwear.map((p) => p.id)).toContain("p17");
+  });
+  it("itemizes every Maasai piece and keeps the bracelet at KSh 500", async () => {
+    const set = await getProductBySlug("sample-complete-maasai-outfit");
+    if (!set) throw new Error("Maasai set missing");
+    const items = setPriceBreakdown(set);
+    expect(items).toHaveLength(4);
+    expect(items.find((item) => item.name === "Beaded bracelet")).toMatchObject({ quantity: 1, unitPrice: 500, total: 500 });
+    expect(items.reduce((sum, item) => sum + item.total, 0)).toBe(set.price);
+  });
+  it("scales included quantities and prices for two full sets", async () => {
+    const set = await getProductBySlug("sample-complete-maasai-outfit");
+    if (!set) throw new Error("Maasai set missing");
+    const items = setPriceBreakdown(set, 2);
+    expect(items.find((item) => item.name === "Beaded bracelet")).toMatchObject({ quantity: 2, unitPrice: 500, total: 1000 });
+    expect(items.find((item) => item.name === "Checked shuka wrap")?.quantity).toBe(4);
+    expect(items.reduce((sum, item) => sum + item.total, 0)).toBe(set.price * 2);
   });
 });

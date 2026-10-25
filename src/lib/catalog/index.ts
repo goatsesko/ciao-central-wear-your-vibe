@@ -97,3 +97,12 @@ export const relatedQuery = (product: Product) =>
   queryOptions({ queryKey: ["related", product.id], queryFn: () => getRelatedProducts(product) });
 
 export const facetsQuery = () => queryOptions({ queryKey: ["facets"], queryFn: getFilterFacets });
+
+/** Per-piece pricing, scaled to the number of complete sets in the bag. */
+export function setPriceBreakdown(product: Product, sets = 1) {
+  return (product.priceBreakdown ?? []).map((item) => ({
+    ...item,
+    quantity: item.quantity * sets,
+    total: item.unitPrice * item.quantity * sets,
+  }));
+}
